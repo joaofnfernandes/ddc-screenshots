@@ -1,0 +1,31 @@
+version: '2.1'
+
+services:
+
+  # Selenium running on a Chrome browser
+  selenium:
+    image: selenium/standalone-chrome:3.4.0-chromium
+    ports:
+      - 4444:4444
+    environment:
+      - LANG=ZH
+
+  integration:
+    build: .
+    depends_on:
+      - selenium
+    volumes:
+      - ./src/app:/usr/src/app/
+      - ./output:/output
+    environment:
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - SELENIUM_BROWSERS=chrome
+      - SELENIUM_RETRY_TIMEOUT = 60
+      - SELENIUM_VERBOSE
+      - SELENIUM_RETRIES
+      - FIXTURES_PATH=/usr/src/fixtures
+      - SCREENSHOTS_PATH=/output
+      - UCP_URL=https://192.168.99.102
+      - UCP_ADMIN_USERNAME=admin
+      - UCP_ADMIN_PASSWORD=password

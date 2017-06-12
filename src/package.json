@@ -1,0 +1,8 @@
+{
+  "name": "ui-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "nightwatch": "^0.9.12"
+  }
+}
